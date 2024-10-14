@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5430/crm
+    username: crm
+    password: crm
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: tester
+  flyway:
+    enabled: true
+    locations:
+      - db.migration
+    encoding: UTF-8

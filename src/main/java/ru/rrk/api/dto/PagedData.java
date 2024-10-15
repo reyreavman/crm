@@ -1,12 +1,12 @@
-package ru.rrk.api.dto.seller;
+package ru.rrk.api.dto;
 
 import java.util.List;
 
-public record PagedSellerDTO(
+public record PagedData<T>(
         Integer pageSize,
         Integer pageNumber,
         Integer totalPages,
         Integer totalElements,
-        List<SellerDTO> items
+        List<T> items
 ) {
 }

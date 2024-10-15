@@ -8,8 +8,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import ru.rrk.api.dto.PagedData;
 import ru.rrk.api.dto.seller.CreateSellerDTO;
-import ru.rrk.api.dto.seller.PagedSellerDTO;
 import ru.rrk.api.dto.seller.SellerDTO;
 import ru.rrk.api.dto.seller.UpdateSellerDTO;
 import ru.rrk.core.entity.Seller;
@@ -22,11 +22,11 @@ import ru.rrk.core.entity.Seller;
 public interface SellerMapper {
     SellerMapper INSTANCE = Mappers.getMapper(SellerMapper.class);
 
-    SellerDTO mapToSellerDTO(Seller seller);
+    SellerDTO toSellerDTO(Seller seller);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "registrationDate", ignore = true)
-    Seller mapToSeller(CreateSellerDTO createSellerDTO);
+    Seller toSeller(CreateSellerDTO createSellerDTO);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "registrationDate", ignore = true)
@@ -37,5 +37,5 @@ public interface SellerMapper {
     @Mapping(target = "totalPages", source = "totalPages")
     @Mapping(target = "totalElements", source = "totalElements")
     @Mapping(target = "items", source = "content")
-    PagedSellerDTO mapToPagedSellerDTO(Page<Seller> sellers);
+    PagedData<SellerDTO> toPagedSellerDTO(Page<Seller> sellers);
 }

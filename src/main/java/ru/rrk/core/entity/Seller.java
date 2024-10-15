@@ -29,11 +29,3 @@ public class Seller {
     @CreationTimestamp
     private LocalDateTime registrationDate;
 }
-
-/*
-Список всех продавцов
-Инфо о конкретном продавце
-Создать нового продавца
-Обновить инфо о продавце
-Удалить продавца
- */

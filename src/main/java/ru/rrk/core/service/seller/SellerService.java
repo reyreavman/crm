@@ -1,12 +1,16 @@
-package ru.rrk.core.service;
+package ru.rrk.core.service.seller;
 
+import ru.rrk.api.dto.PagedData;
 import ru.rrk.api.dto.seller.CreateSellerDTO;
-import ru.rrk.api.dto.seller.PagedSellerDTO;
 import ru.rrk.api.dto.seller.SellerDTO;
 import ru.rrk.api.dto.seller.UpdateSellerDTO;
 
+import java.util.List;
+
 public interface SellerService {
-    PagedSellerDTO findAllSellers(int page, int pageSize);
+    PagedData<SellerDTO> findPagedSellers(int page, int pageSize);
+
+    List<SellerDTO> findAllSellers();
 
     SellerDTO findSellerById(long id);
 

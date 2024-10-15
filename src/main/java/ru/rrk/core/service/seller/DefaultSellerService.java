@@ -1,17 +1,19 @@
-package ru.rrk.core.service;
+package ru.rrk.core.service.seller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ru.rrk.api.dto.PagedData;
 import ru.rrk.api.dto.seller.CreateSellerDTO;
-import ru.rrk.api.dto.seller.PagedSellerDTO;
 import ru.rrk.api.dto.seller.SellerDTO;
 import ru.rrk.api.dto.seller.UpdateSellerDTO;
 import ru.rrk.core.entity.Seller;
-import ru.rrk.core.exception.ServiceException;
+import ru.rrk.core.exception.service.ServiceException;
 import ru.rrk.core.mapper.SellerMapper;
-import ru.rrk.core.repository.seller.SellerRepository;
+import ru.rrk.core.repository.SellerRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,14 +23,22 @@ public class DefaultSellerService implements SellerService {
     private final SellerMapper sellerMapper;
 
     @Override
-    public PagedSellerDTO findAllSellers(int page, int pageSize) {
+    public PagedData<SellerDTO> findPagedSellers(int page, int pageSize) {
         Page<Seller> pagedSellers = sellerRepository.findAll(PageRequest.of(page, pageSize));
-        return sellerMapper.mapToPagedSellerDTO(pagedSellers);
+        return sellerMapper.toPagedSellerDTO(pagedSellers);
+    }
+
+    @Override
+    public List<SellerDTO> findAllSellers() {
+        return sellerRepository.findAll()
+                .stream()
+                .map(sellerMapper::toSellerDTO)
+                .toList();
     }
 
     @Override
     public SellerDTO findSellerById(long id) {
-        return sellerMapper.mapToSellerDTO(
+        return sellerMapper.toSellerDTO(
                 findById(id)
         );
     }
@@ -36,17 +46,18 @@ public class DefaultSellerService implements SellerService {
     @Override
     public SellerDTO createSeller(CreateSellerDTO createSellerDTO) {
         Seller savedSeller = sellerRepository.save(
-                sellerMapper.mapToSeller(createSellerDTO)
+                sellerMapper.toSeller(createSellerDTO)
         );
-        return sellerMapper.mapToSellerDTO(savedSeller);
+        return sellerMapper.toSellerDTO(savedSeller);
     }
 
     @Override
+//    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public SellerDTO updateSeller(long id, UpdateSellerDTO updateSellerDTO) {
         Seller sellerWithUpdatedData = sellerMapper.updateSellerData(
                 updateSellerDTO, findById(id)
         );
-        return sellerMapper.mapToSellerDTO(sellerWithUpdatedData);
+        return sellerMapper.toSellerDTO(sellerWithUpdatedData);
     }
 
     @Override

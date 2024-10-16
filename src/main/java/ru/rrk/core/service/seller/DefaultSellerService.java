@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.rrk.api.dto.PagedData;
 import ru.rrk.api.dto.seller.CreateSellerDTO;
 import ru.rrk.api.dto.seller.SellerDTO;
@@ -17,13 +19,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-//TODO: Раскидай @transactional
 public class DefaultSellerService implements SellerService {
     private final SellerRepository sellerRepository;
     private final SellerMapper sellerMapper;
 
     @Override
-    public PagedData<SellerDTO> findPagedSellers(int page, int pageSize) {
+    public PagedData<SellerDTO> findSellers(int page, int pageSize) {
         Page<Seller> pagedSellers = sellerRepository.findAll(PageRequest.of(page, pageSize));
         return sellerMapper.toPagedSellerDTO(pagedSellers);
     }
@@ -52,7 +53,7 @@ public class DefaultSellerService implements SellerService {
     }
 
     @Override
-//    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Transactional
     public SellerDTO updateSeller(long id, UpdateSellerDTO updateSellerDTO) {
         Seller sellerWithUpdatedData = sellerMapper.updateSellerData(
                 updateSellerDTO, findById(id)
@@ -61,6 +62,7 @@ public class DefaultSellerService implements SellerService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void removeSeller(long id) {
         sellerRepository.deleteById(id);
     }

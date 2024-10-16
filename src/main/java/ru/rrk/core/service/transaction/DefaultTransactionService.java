@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.rrk.api.dto.PagedData;
 import ru.rrk.api.dto.transaction.CreateTransactionDTO;
 import ru.rrk.api.dto.transaction.TransactionDTO;
@@ -17,7 +20,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-//TODO: Раскидай @transactional
 public class DefaultTransactionService implements TransactionService {
     private final TransactionRepository transactionRepository;
     private final SellerRepository sellerRepository;
@@ -46,6 +48,7 @@ public class DefaultTransactionService implements TransactionService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ)
     public TransactionDTO createTransaction(CreateTransactionDTO createTransactionDTO) {
         Transaction savedTransaction = transactionRepository.save(
                 transactionMapper.toTransaction(

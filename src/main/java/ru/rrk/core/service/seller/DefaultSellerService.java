@@ -24,7 +24,7 @@ public class DefaultSellerService implements SellerService {
     private final SellerMapper sellerMapper;
 
     @Override
-    public PagedData<SellerDTO> findSellers(int page, int pageSize) {
+    public PagedData<SellerDTO> findPagedSellers(int page, int pageSize) {
         Page<Seller> pagedSellers = sellerRepository.findAll(PageRequest.of(page, pageSize));
         return sellerMapper.toPagedSellerDTO(pagedSellers);
     }

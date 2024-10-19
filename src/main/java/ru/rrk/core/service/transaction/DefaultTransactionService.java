@@ -2,42 +2,39 @@ package ru.rrk.core.service.transaction;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rrk.api.dto.PagedData;
-import ru.rrk.api.dto.transaction.CreateTransactionDTO;
-import ru.rrk.api.dto.transaction.TransactionDTO;
+import ru.rrk.api.dto.transaction.request.CreateTransactionDTO;
+import ru.rrk.api.dto.transaction.response.TransactionDTO;
 import ru.rrk.core.entity.transaction.Transaction;
 import ru.rrk.core.exception.service.ServiceException;
 import ru.rrk.core.mapper.TransactionMapper;
-import ru.rrk.core.repository.SellerRepository;
 import ru.rrk.core.repository.TransactionRepository;
+import ru.rrk.core.service.seller.SellerService;
 
-import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class DefaultTransactionService implements TransactionService {
     private final TransactionRepository transactionRepository;
-    private final SellerRepository sellerRepository;
-
     private final TransactionMapper transactionMapper;
 
-    @Override
-    public PagedData<TransactionDTO> findPagedTransactions(int page, int pageSize) {
-        Page<Transaction> pagedTransactions = transactionRepository.findAll(PageRequest.of(page, pageSize));
-        return transactionMapper.toPagedTransactionDTO(pagedTransactions);
-    }
+    private final SellerService sellerService;
 
     @Override
-    public List<TransactionDTO> findAllTransactions() {
-        return transactionRepository.findAll()
-                .stream()
-                .map(transactionMapper::toTransactionDTO)
-                .toList();
+    public PagedData<TransactionDTO> findPagedTransactions(Long sellerId, Pageable pageable) {
+        Page<Transaction> pagedTransaction;
+        if (Objects.nonNull(sellerId)) {
+            pagedTransaction = transactionRepository.findAllBySellerId(sellerId, pageable);
+        } else {
+            pagedTransaction = transactionRepository.findAll(pageable);
+        }
+        return transactionMapper.toPagedTransactionDTO(pagedTransaction);
     }
 
     @Override
@@ -50,24 +47,20 @@ public class DefaultTransactionService implements TransactionService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ)
     public TransactionDTO createTransaction(CreateTransactionDTO createTransactionDTO) {
+        if (!sellerService.existsById(createTransactionDTO.sellerId())) {
+            throw new ServiceException("Пользователь с id = %d не найден".formatted(createTransactionDTO.sellerId()));
+        }
         Transaction savedTransaction = transactionRepository.save(
                 transactionMapper.toTransaction(
-                        createTransactionDTO, sellerRepository.getReferenceById(createTransactionDTO.sellerId())
+                        createTransactionDTO, sellerService.findSellerReferenceById(createTransactionDTO.sellerId())
                 )
         );
         return transactionMapper.toTransactionDTO(savedTransaction);
     }
 
-    @Override
-    public List<TransactionDTO> findAllUserTransactions(long sellerId) {
-        return transactionMapper.toTransactionDTOList(
-                transactionRepository.findAllBySellerId(sellerId)
-        );
-    }
-
     private Transaction findById(long id) {
         return transactionRepository.findById(id).orElseThrow(
-                () -> new ServiceException("Transaction with id %d not found".formatted(id))
+                () -> new ServiceException("Транзакция с id = %d не найдена".formatted(id))
         );
     }
 }

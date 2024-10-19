@@ -1,19 +1,14 @@
 package ru.rrk.core.service.transaction;
 
+import org.springframework.data.domain.Pageable;
 import ru.rrk.api.dto.PagedData;
-import ru.rrk.api.dto.transaction.CreateTransactionDTO;
-import ru.rrk.api.dto.transaction.TransactionDTO;
-
-import java.util.List;
+import ru.rrk.api.dto.transaction.request.CreateTransactionDTO;
+import ru.rrk.api.dto.transaction.response.TransactionDTO;
 
 public interface TransactionService {
-    PagedData<TransactionDTO> findPagedTransactions(int page, int pageSize);
-
-    List<TransactionDTO> findAllTransactions();
+    PagedData<TransactionDTO> findPagedTransactions(Long sellerId, Pageable pageable);
 
     TransactionDTO findTransactionById(long id);
 
     TransactionDTO createTransaction(CreateTransactionDTO createTransactionDTO);
-
-    List<TransactionDTO> findAllUserTransactions(long userId);
 }

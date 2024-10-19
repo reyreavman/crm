@@ -9,9 +9,9 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import ru.rrk.api.dto.PagedData;
-import ru.rrk.api.dto.seller.CreateSellerDTO;
-import ru.rrk.api.dto.seller.SellerDTO;
-import ru.rrk.api.dto.seller.UpdateSellerDTO;
+import ru.rrk.api.dto.seller.request.CreateSellerDTO;
+import ru.rrk.api.dto.seller.request.UpdateSellerDTO;
+import ru.rrk.api.dto.seller.response.SellerDTO;
 import ru.rrk.core.entity.Seller;
 
 
@@ -25,6 +25,8 @@ public interface SellerMapper {
     SellerDTO toSellerDTO(Seller seller);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", expression = "java(createSellerDTO.name().trim())")
+    @Mapping(target = "contactInfo", expression = "java(createSellerDTO.contactInfo().trim())")
     @Mapping(target = "registrationDate", ignore = true)
     Seller toSeller(CreateSellerDTO createSellerDTO);
 

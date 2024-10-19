@@ -78,7 +78,6 @@ public interface FilteredSellerRepository extends PagingAndSortingRepository<Sel
             JOIN Transaction t on s.id = t.seller_id
             WHERE (cast(:startDate as date) IS NULL OR DATE(t.transaction_date) >= :startDate)
             AND (cast(:endDate as date) IS NULL OR DATE(t.transaction_date) <= :endDate)
-                        
             GROUP BY s.id, s.name, s.contact_info, s.registration_date
             HAVING SUM(t.amount) < :amount
             """,

@@ -8,8 +8,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import ru.rrk.api.dto.PagedData;
-import ru.rrk.api.dto.transaction.CreateTransactionDTO;
-import ru.rrk.api.dto.transaction.TransactionDTO;
+import ru.rrk.api.dto.transaction.request.CreateTransactionDTO;
+import ru.rrk.api.dto.transaction.response.TransactionDTO;
 import ru.rrk.core.entity.Seller;
 import ru.rrk.core.entity.transaction.Transaction;
 

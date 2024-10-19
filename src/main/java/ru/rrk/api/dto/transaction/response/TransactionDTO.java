@@ -1,4 +1,4 @@
-package ru.rrk.api.dto.transaction;
+package ru.rrk.api.dto.transaction.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

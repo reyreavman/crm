@@ -14,8 +14,4 @@ public record ValidationErrorDTO(
         this(violations, LocalDateTime.now());
     }
 
-    public ValidationErrorDTO(List<Violation> violations, LocalDateTime creationDateTime) {
-        this.violations = violations;
-        this.creationDateTime = creationDateTime;
-    }
 }

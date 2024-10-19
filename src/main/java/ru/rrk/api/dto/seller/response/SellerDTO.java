@@ -1,4 +1,4 @@
-package ru.rrk.api.dto.seller;
+package ru.rrk.api.dto.seller.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

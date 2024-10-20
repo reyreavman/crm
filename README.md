@@ -61,8 +61,8 @@ $ docker compose up
 - [Spring Doc](https://spring.io/projects/spring-restdocs)
 - [Swagger](https://swagger.io/)
 
-Документация к API и примеры запросов/ответов доступны по URL: [/api-docs](/api-docs)  
-UI для комфортного просмотра доступного API и примеров запросов: [/swagger-ui](/swagger-ui)
+Документация к API и примеры запросов/ответов доступны по URL: [/api-docs](localhost:8080/api-docs)  
+UI для комфортного просмотра доступного API и примеров запросов: [/swagger-ui](localhost:8080/swagger-ui)
 
 ### Функциональность
 Реализованный API имеет следующие методы:

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:16:///crmTests?TC_DAEMON=true
+    username: crmTests
+    password: crmTests
+    hikari:
+      schema: crm
+  flyway:
+    enabled: true
+    locations:
+      - sql
+    encoding: UTF-8
+

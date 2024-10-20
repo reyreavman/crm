@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5430/crm
+    username: crm
+    password: crm
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: crm
+  flyway:
+    enabled: true
+    locations:
+      - db.migration
+    encoding: UTF-8
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui
+    operationsSorter: method

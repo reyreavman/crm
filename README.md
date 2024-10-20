@@ -20,12 +20,12 @@
 - В качестве системы сборки использован Gradle.
 
 ### Технологии
-- [Spring Boot](https://spring.io/projects/spring-boot)
-- [Spring Data JPA](https://spring.io/projects/spring-data)
-- [Spring Validation](https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html)
-- [Flyway](https://www.red-gate.com/products/flyway/community/)
-- [Lombok](https://projectlombok.org/)
-- [Docker](https://www.docker.com/)
+- [Spring Boot](https://spring.io/projects/spring-boot) - инструмент для создания RESTful API
+- [Spring Data JPA](https://spring.io/projects/spring-data) - механизм взаимодействия с сущностями БД
+- [Spring Validation](https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html) - API для валидации данных
+- [Flyway](https://www.red-gate.com/products/flyway/community/) - инструмент миграций БД
+- [Lombok](https://projectlombok.org/) - библиотека для автогенерации бойлерплейт Java кода
+- [Docker](https://www.docker.com/) - платформа контейнеризации
 
 ### Тестирование
 Для тестирования в проекте были использованы:

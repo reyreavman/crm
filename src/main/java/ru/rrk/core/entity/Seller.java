@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -28,4 +29,22 @@ public class Seller {
 
     @CreationTimestamp
     private LocalDateTime registrationDate;
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Seller seller)) return false;
+
+        if (getId() == null || seller.getId() == null) {
+            return Objects.equals(getName(), seller.getName()) &&
+                   Objects.equals(getContactInfo(), seller.getContactInfo()) &&
+                   Objects.equals(getRegistrationDate(), seller.getRegistrationDate());
+        }
+        return getId().equals(seller.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getContactInfo(), getRegistrationDate());
+    }
 }

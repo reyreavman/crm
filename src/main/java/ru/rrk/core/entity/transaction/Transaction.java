@@ -18,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import ru.rrk.core.entity.Seller;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -41,4 +42,23 @@ public class Transaction {
 
     @CreationTimestamp
     private LocalDateTime transactionDate;
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Transaction that)) return false;
+
+        if (getId() == null || that.getId() == null) {
+            return Objects.equals(getSeller(), that.getSeller()) &&
+                   Objects.equals(getAmount(), that.getAmount()) &&
+                   Objects.equals(getTransactionDate(), that.getTransactionDate()) &&
+                   getPaymentType() == that.getPaymentType();
+        }
+        return getId().equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getSeller(), getAmount(), getPaymentType(), getTransactionDate());
+    }
 }

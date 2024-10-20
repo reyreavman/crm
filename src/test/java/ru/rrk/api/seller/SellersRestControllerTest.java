@@ -69,17 +69,6 @@ public class SellersRestControllerTest {
                         {"pageSize":20,"pageNumber":0,"totalPages":1,"totalElements":5,"items":[{"id":3,"name":"Bo Marrow","contactInfo":"+7 224 997 3458"},{"id":4,"name":"Drud Kersting","contactInfo":"+81 617 892 4377"},{"id":8,"name":"Carol Casbon","contactInfo":"+66 776 437 5750"},{"id":9,"name":"Walden Confort","contactInfo":"+385 704 939 9075"},{"id":10,"name":"Linnie Winterscale","contactInfo":"+503 605 502 1032"}]}"""));
     }
 
-    //TODO СНИМИ КОММЕНТ
-//    @Test
-//    void createSeller() throws Exception {
-//        mockMvc.perform(post(URI)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("""
-//                                {"name": "Ivan", "contactInfo":"ivan@example.com"}
-//                                """))
-//                .andExpect(status().isOk());
-//    }
-
     @Test
     void createSeller_returns400_nonValidDataProvided() throws Exception {
         mockMvc.perform(post(URI)

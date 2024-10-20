@@ -1,4 +1,4 @@
-package ru.rrk.core.repository;
+package ru.rrk.core.repository.data;
 
 import ru.rrk.core.entity.Seller;
 import ru.rrk.core.entity.transaction.PaymentType;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DBData {
-    public static final List<Seller> preparedSellers = List.of(
+    private static final List<Seller> preparedSellers = List.of(
             new Seller(1L, "Tessa Porcher", "+86 387 685 9952", LocalDateTime.parse("2024-07-08T00:00:00")),
             new Seller(2L, "Athena Ludlow", "+7 120 534 9963", LocalDateTime.parse("2024-06-02T00:00:00")),
             new Seller(3L, "Bo Marrow", "+7 224 997 3458", LocalDateTime.parse("2024-06-08T00:00:00")),
@@ -20,7 +20,7 @@ public class DBData {
             new Seller(9L, "Walden Confort", "+385 704 939 9075", LocalDateTime.parse("2024-06-14T00:00:00")),
             new Seller(10L, "Linnie Winterscale", "+503 605 502 1032", LocalDateTime.parse("2023-05-18T00:00:00"))
     );
-    public static final List<Transaction> preparedTransactions = List.of(
+    private static final List<Transaction> preparedTransactions = List.of(
             new Transaction(1L, preparedSellers.get(9), Float.valueOf("30095.63"), PaymentType.CASH, LocalDateTime.parse("2023-12-19T00:00:00")),
             new Transaction(2L, preparedSellers.get(8), Float.valueOf("60619.406"), PaymentType.CASH, LocalDateTime.parse("2023-11-18T00:00:00")),
             new Transaction(3L, preparedSellers.get(3), Float.valueOf("39980.142"), PaymentType.CASH, LocalDateTime.parse("2023-12-25T00:00:00")),
@@ -42,4 +42,16 @@ public class DBData {
             new Transaction(19L, preparedSellers.get(7), Float.valueOf("32513.584"), PaymentType.CASH, LocalDateTime.parse("2024-05-20T00:00:00")),
             new Transaction(20L, preparedSellers.get(9), Float.valueOf("3879.705"), PaymentType.CASH, LocalDateTime.parse("2024-10-02T00:00:00"))
     );
+
+    public static Seller getSellerById(Long id) {
+        return preparedSellers.stream()
+                .filter(seller -> seller.getId().equals(id))
+                .findFirst().orElseThrow();
+    }
+
+    public static Transaction getTransactionById(Long id) {
+        return preparedTransactions.stream()
+                .filter(transaction -> transaction.getId().equals(id))
+                .findFirst().orElseThrow();
+    }
 }

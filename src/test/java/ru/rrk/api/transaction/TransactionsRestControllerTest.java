@@ -58,17 +58,6 @@ public class TransactionsRestControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-//    //TODO СНИМИ КОММЕНТ
-//    @Test
-//    void createTransactions() throws Exception {
-//        mockMvc.perform(post(URI)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("""
-//                                {"sellerId": "1","amount": "1000","paymentType":"CARD"}
-//                                """))
-//                .andExpect(status().isOk());
-//    }
-
     @Test
     void createSeller_returns400_nonValidAmountProvided() throws Exception {
         mockMvc.perform(post(URI)

@@ -11,7 +11,7 @@ import ru.rrk.api.dto.PagedData;
 import ru.rrk.api.dto.transaction.request.CreateTransactionDTO;
 import ru.rrk.api.dto.transaction.response.TransactionDTO;
 import ru.rrk.core.entity.transaction.Transaction;
-import ru.rrk.core.exception.service.ServiceException;
+import ru.rrk.core.exception.ServiceException;
 import ru.rrk.core.mapper.TransactionMapper;
 import ru.rrk.core.repository.TransactionRepository;
 import ru.rrk.core.service.seller.SellerService;

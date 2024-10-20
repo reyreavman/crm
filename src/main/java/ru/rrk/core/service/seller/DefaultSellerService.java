@@ -11,7 +11,7 @@ import ru.rrk.api.dto.seller.request.CreateSellerDTO;
 import ru.rrk.api.dto.seller.request.UpdateSellerDTO;
 import ru.rrk.api.dto.seller.response.SellerDTO;
 import ru.rrk.core.entity.Seller;
-import ru.rrk.core.exception.service.ServiceException;
+import ru.rrk.core.exception.ServiceException;
 import ru.rrk.core.mapper.SellerMapper;
 import ru.rrk.core.repository.seller.SellerRepository;
 

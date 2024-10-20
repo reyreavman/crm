@@ -1,6 +1,7 @@
 package ru.rrk.api.dto.transaction.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import ru.rrk.core.entity.transaction.PaymentType;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +13,8 @@ public record TransactionDTO(
         Long sellerId,
         @Schema(description = "Сумма транзакции", exclusiveMinimum = true, minimum = "0")
         Float amount,
-        @Schema(description = "Тип транзакции", allowableValues = {"cash", "card", "transfer"})
-        String paymentType,
+        @Schema(description = "Тип транзакции", allowableValues = {"CASH", "CARD", "TRANSFER"})
+        PaymentType paymentType,
         @Schema(description = "Время совершения транзакции")
         LocalDateTime transactionDate
 ) {

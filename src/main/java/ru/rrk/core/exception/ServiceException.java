@@ -1,4 +1,4 @@
-package ru.rrk.core.exception.service;
+package ru.rrk.core.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

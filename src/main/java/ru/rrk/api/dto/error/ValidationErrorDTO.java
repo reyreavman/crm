@@ -1,17 +1,17 @@
 package ru.rrk.api.dto.error;
 
 
-import ru.rrk.core.exception.violation.Violation;
+import ru.rrk.core.exception.ViolationsException;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public record ValidationErrorDTO(
-        List<Violation> violations,
+        List<ViolationsException> violationsExceptions,
         LocalDateTime creationDateTime
 ) {
-    public ValidationErrorDTO(List<Violation> violations) {
-        this(violations, LocalDateTime.now());
+    public ValidationErrorDTO(List<ViolationsException> violationsExceptions) {
+        this(violationsExceptions, LocalDateTime.now());
     }
 
 }

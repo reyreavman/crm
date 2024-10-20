@@ -6,23 +6,41 @@
 Также включает в себя функции аналитики для обработки и анализа данных.
 
 ## Содержание
+- [Разработка](#разработка)
 - [Технологии](#технологии)
-- [Требования](#требования)
-- [Запуск](#запуск)
 - [Тестирование](#тестирование)
-- [Документация к API. Примеры Запросов](#эндпоинты)
+- [Требования к запуску](#требования-к-запуску)
+- [Запуск](#запуск)
+- [Документация к API](#документация-к-api-и-примеры-запросов)
+- [Функциональность](#функциональность)
 
-## Технологии
+### Разработка
+- Для реализации задачи была выбрана Java. 
+- Как основная БД была использована PostgreSQL, для тестирования использовался PostgresqlContainer.
+- В качестве системы сборки использован Gradle.
+
+### Технологии
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Data JPA](https://spring.io/projects/spring-data)
 - [Spring Validation](https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html)
 - [Flyway](https://www.red-gate.com/products/flyway/community/)
 - [Lombok](https://projectlombok.org/)
+- [Docker](https://www.docker.com/)
+
+### Тестирование
+Для тестирования в проекте были использованы:
+
 - [Spring Boot Test](https://spring.io/guides/gs/testing-web)
 - [AssertJ](https://assertj.github.io/doc/)
 - [TestContainers](https://testcontainers.com/)
 
-### Требования
+Проект покрыт юнит-тестами. Написаны юнит тесты для всех основных сценариев использования контроллеров и слоя сервисов.
+Также написаны интеграционные тесты с помощью TestContainers для тестирования слоя репозиториев.
+```sh
+./gradlew test
+```
+
+### Требования к запуску
 Для установки и запуска проекта необходим Docker.
 
 ### Запуск
@@ -37,28 +55,16 @@ $ docker compose up
 
 По умолчание проекта запускается на порту 8080.
 
-## Тестирование
-Для тестирования в проекте были использованы:
-
-- [Spring Boot Test](https://spring.io/guides/gs/testing-web)
-- [AssertJ](https://assertj.github.io/doc/)
-- [TestContainers](https://testcontainers.com/)
-
-Проект покрыт юнит-тестами. Написаны юнит тесты для слоя контроллеров и сервисов. 
-Также написаны интеграционные тесты с помощью TestContainers для тестирования слоя репозиториев.
-```sh
-./gradlew test
-```
-
-## Документация к API. Примеры Запросов
+### Документация к API и примеры запросов
 Для генерации документации к API были использованы:
 
 - [Spring Doc](https://spring.io/projects/spring-restdocs)
 - [Swagger](https://swagger.io/)
 
-Документация к API доступна по URL: [/api-docs](/api-docs)  
+Документация к API и примеры запросов/ответов доступны по URL: [/api-docs](/api-docs)  
 UI для комфортного просмотра доступного API и примеров запросов: [/swagger-ui](/swagger-ui)
 
+### Функциональность
 Реализованный API имеет следующие методы:
 - Получение списка продавцов
 - Информация о конкретном продавце 

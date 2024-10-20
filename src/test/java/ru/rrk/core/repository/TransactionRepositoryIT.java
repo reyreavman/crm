@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 import ru.rrk.core.entity.transaction.Transaction;
-import ru.rrk.testContainter.PostgresqlContainerTest;
+import ru.rrk.core.repository.data.DBData;
+import ru.rrk.core.repository.testContainer.PostgresqlContainerTest;
 
 import java.util.List;
 
@@ -25,14 +26,13 @@ public class TransactionRepositoryIT {
     @Test
     void findAllBySellerId_returnsTransactionsList() {
         Long sellerId = 3L;
-        List<Long> expectedTransactionIDs = List.of(
-                4L, 10L
+        List<Transaction> expectedTransaction = List.of(
+                DBData.getTransactionById(4L),
+                DBData.getTransactionById(10L)
         );
 
-        List<Long> actualTransactionsIds = transactionRepository.findAllBySellerId(sellerId).stream()
-                .map(Transaction::getId)
-                .toList();
+        List<Transaction> actualTransactions = transactionRepository.findAllBySellerId(sellerId);
 
-        assertEquals(expectedTransactionIDs, actualTransactionsIds);
+        assertEquals(expectedTransaction, actualTransactions);
     }
 }

@@ -1,4 +1,4 @@
-package ru.rrk.testContainter;
+package ru.rrk.core.repository.testContainer;
 
 import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;

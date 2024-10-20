@@ -41,7 +41,14 @@ public class SellersRestController {
                     content = @Content(
                             mediaType = "application/json"
                     )
-            )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Некорректный запрос",
+                    content = @Content(
+                            mediaType = "application/json"
+                    )
+            ),
     })
     @GetMapping
     public PagedData<SellerDTO> getPagedSellers(@ParameterObject @PageableDefault(value = 20) Pageable pageable,
@@ -69,7 +76,7 @@ public class SellersRestController {
                             examples = @ExampleObject(
                                     """
                                             {
-                                                "violations": [
+                                                "violationsExceptions": [
                                                     {
                                                         "fieldName": "name",
                                                         "message": "Имя не должно быть пустым"
@@ -97,6 +104,13 @@ public class SellersRestController {
             @ApiResponse(
                     responseCode = "200",
                     description = "Успешный запрос",
+                    content = @Content(
+                            mediaType = "application/json"
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Переданы неверные фильтры",
                     content = @Content(
                             mediaType = "application/json"
                     )

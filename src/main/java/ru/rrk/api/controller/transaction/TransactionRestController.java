@@ -37,7 +37,7 @@ public class TransactionRestController {
                             examples = @ExampleObject(
                                     """
                                             {
-                                                "violations": [
+                                                "violationsExceptions": [
                                                     {
                                                         "fieldName": "transactionId",
                                                         "message": "должно быть больше 0"

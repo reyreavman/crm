@@ -72,7 +72,7 @@ public class SellerRestController {
                             examples = @ExampleObject(
                                     """
                                             {
-                                                "violations": [
+                                                "violationsExceptions": [
                                                     {
                                                         "fieldName": "name",
                                                         "message": "Имя не должно быть пустым"
@@ -115,6 +115,10 @@ public class SellerRestController {
             @ApiResponse(
                     responseCode = "200",
                     description = "Успешный запрос"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Передан невалидный id"
             )
     })
     @DeleteMapping

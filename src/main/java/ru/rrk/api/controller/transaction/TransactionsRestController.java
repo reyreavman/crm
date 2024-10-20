@@ -50,7 +50,7 @@ public class TransactionsRestController {
                             examples = @ExampleObject(
                                     """
                                             {
-                                                "violations": [
+                                                "violationsExceptions": [
                                                     {
                                                         "fieldName": "sellerId",
                                                         "message": "должно быть больше 0"
@@ -87,7 +87,7 @@ public class TransactionsRestController {
                             examples = @ExampleObject(
                                     """
                                             {
-                                                "violations": [
+                                                "violationsExceptions": [
                                                     {
                                                         "fieldName": "name",
                                                         "message": "Имя не должно быть пустым"

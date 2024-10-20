@@ -8,11 +8,3 @@ services:
       POSTGRES_USER: crm
       POSTGRES_PASSWORD: crm
       POSTGRES_DB: crm
-  crm:
-    restart: always
-    build:
-      dockerfile: Dockerfile
-      args:
-        JAR_FILE: shift_lab-1/target/shift_lab-1-SNAPSHOT-exec.jar
-      tags:
-        - localhost:8080/shift_lab/crm:1
